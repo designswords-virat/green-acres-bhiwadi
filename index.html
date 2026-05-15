@@ -198,18 +198,20 @@
   }
   .subscribe-pill input::placeholder { color: #9c9c9c; letter-spacing: 0.04em; }
   .subscribe-pill button {
-    background: #ffffff;
-    color: #2a2a2a;
+    background: var(--green-800);
+    color: #fff;
     border: none;
-    padding: 10px 30px;
+    padding: 11px 28px;
     border-radius: 999px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
     font-weight: 600;
+    letter-spacing: 0.06em;
     cursor: pointer;
-    transition: background .2s, color .2s;
+    transition: background .2s, transform .2s;
+    white-space: nowrap;
   }
-  .subscribe-pill button:hover { background: var(--green-800); color: #fff; }
+  .subscribe-pill button:hover { background: var(--green-900); transform: translateY(-1px); }
 
   .footer-bottom {
     max-width: 1400px;
@@ -248,15 +250,21 @@
   @media (max-width: 1000px) {
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; }
     .footer-grid .col-updated { grid-column: 1 / -1; }
-    body { padding-bottom: 340px; }
+    body { padding-bottom: 380px; }
   }
   @media (max-width: 600px) {
     footer.site-footer { padding: 50px 6vw 0; }
-    .footer-grid { grid-template-columns: 1fr; gap: 40px; padding-bottom: 40px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; padding-bottom: 36px; }
     .stay-updated-row { flex-direction: column; align-items: stretch; gap: 14px; }
     .stay-label { text-align: center; }
-    .footer-bottom { flex-direction: column; text-align: center; }
-    .footer-bottom-left { justify-content: center; }
+    .subscribe-pill { min-width: 0; }
+    .subscribe-pill input { padding: 12px 18px; font-size: 13px; }
+    .subscribe-pill button { padding: 10px 20px; font-size: 13px; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 18px; padding: 22px 0 26px; }
+    .footer-bottom-left { flex-direction: column; gap: 6px; }
+    .footer-bottom-left .sep { display: none; }
+    .footer-socials { justify-content: center; gap: 20px; }
+    body { padding-bottom: 400px; }
   }
 
   /* ===== STICKY ENQUIRY BAR ===== */

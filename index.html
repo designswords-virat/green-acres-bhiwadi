@@ -47,6 +47,25 @@
     display: flex; align-items: center; justify-content: space-between;
   }
   .nav .logo { height: 56px; width: auto; }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid var(--green-800);
+    color: var(--green-900);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: background .2s, transform .2s, color .2s;
+  }
+  .nav-call svg { color: var(--green-800); }
+  .nav-call:hover { background: var(--green-800); color: #fff; transform: translateY(-1px); }
+  .nav-call:hover svg { color: #fff; }
+  .nav-call .call-text { display: inline; }
   .nav-cta {
     background: var(--green-800);
     color: #fff;
@@ -60,6 +79,11 @@
     border: 1px solid var(--green-800);
   }
   .nav-cta:hover { background: var(--green-900); transform: translateY(-1px); }
+  @media (max-width: 600px) {
+    .nav-call { padding: 9px 12px; }
+    .nav-call .call-text { display: none; }
+    .nav-right { gap: 8px; }
+  }
 
   /* ===== HERO ===== */
   .hero {
@@ -281,7 +305,13 @@
 <!-- ===== NAV ===== -->
 <nav class="nav">
   <a href="#"><img class="logo" src="logo/logo1.png" alt="Reverence Realty by Ashadeep" /></a>
-  <a href="#register" class="nav-cta">Register Interest</a>
+  <div class="nav-right">
+    <a href="tel:+919999999999" class="nav-call" aria-label="Call sales">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <span class="call-text">+91 99999 99999</span>
+    </a>
+    <a href="#register" class="nav-cta">Register Interest</a>
+  </div>
 </nav>
 
 <!-- ===== HERO ===== -->

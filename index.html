@@ -122,8 +122,8 @@
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr 1.6fr;
-    gap: 60px;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
     max-width: 1400px;
     margin: 0 auto;
     padding-bottom: 60px;
@@ -163,58 +163,6 @@
   }
   .footer-links a:hover { color: #d9c98a; }
 
-  .stay-updated-row {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    flex-wrap: wrap;
-  }
-  .stay-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 500;
-    color: #d9c98a;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .subscribe-pill {
-    flex: 1;
-    min-width: 280px;
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 999px;
-    padding: 5px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-  }
-  .subscribe-pill input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    padding: 12px 22px;
-    font-size: 14px;
-    font-family: 'Inter', sans-serif;
-    color: #6b6b6b;
-    outline: none;
-  }
-  .subscribe-pill input::placeholder { color: #9c9c9c; letter-spacing: 0.04em; }
-  .subscribe-pill button {
-    background: var(--green-800);
-    color: #fff;
-    border: none;
-    padding: 11px 28px;
-    border-radius: 999px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    transition: background .2s, transform .2s;
-    white-space: nowrap;
-  }
-  .subscribe-pill button:hover { background: var(--green-900); transform: translateY(-1px); }
-
   .footer-bottom {
     max-width: 1400px;
     margin: 0 auto;
@@ -251,17 +199,11 @@
 
   @media (max-width: 1000px) {
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; }
-    .footer-grid .col-updated { grid-column: 1 / -1; }
     body { padding-bottom: 380px; }
   }
   @media (max-width: 600px) {
     footer.site-footer { padding: 50px 6vw 0; }
     .footer-grid { grid-template-columns: 1fr; gap: 36px; padding-bottom: 36px; }
-    .stay-updated-row { flex-direction: column; align-items: stretch; gap: 14px; }
-    .stay-label { text-align: center; }
-    .subscribe-pill { min-width: 0; }
-    .subscribe-pill input { padding: 12px 18px; font-size: 13px; }
-    .subscribe-pill button { padding: 10px 20px; font-size: 13px; }
     .footer-bottom { flex-direction: column; text-align: center; gap: 18px; padding: 22px 0 26px; }
     .footer-bottom-left { flex-direction: column; gap: 6px; }
     .footer-bottom-left .sep { display: none; }
@@ -306,7 +248,17 @@
     background: rgba(255,255,255,0.12);
   }
   .enquiry-bar input::placeholder { color: rgba(255,255,255,0.6); }
-  .enquiry-bar select { color: rgba(255,255,255,0.7); cursor: pointer; }
+  .enquiry-bar select {
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 42px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='white' stroke-opacity='0.7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='1 1 6 6 11 1'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
   .enquiry-bar select option { background: var(--green-900); color: #fff; }
   .enquiry-bar button {
     padding: 14px 36px;
@@ -384,16 +336,6 @@
       </ul>
     </div>
 
-    <!-- Stay Updated -->
-    <div class="footer-col col-updated">
-      <div class="stay-updated-row">
-        <div class="stay-label">Stay Updated</div>
-        <form class="subscribe-pill" id="subscribeForm" onsubmit="submitSubscribe(event)">
-          <input type="email" name="email" placeholder="Enter Your Email Address" required />
-          <button type="submit" id="subscribeBtn">Subscribe</button>
-        </form>
-      </div>
-    </div>
   </div>
 
   <!-- Bottom row -->
@@ -459,31 +401,6 @@
     }
   }
 
-  async function submitSubscribe(e) {
-    e.preventDefault();
-    const form = document.getElementById('subscribeForm');
-    const btn = document.getElementById('subscribeBtn');
-    const original = btn.textContent;
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    try {
-      const formData = new FormData(form);
-      formData.append('type', 'subscribe');
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      });
-      alert('Subscribed! We will keep you updated.');
-      form.reset();
-    } catch (err) {
-      alert('Something went wrong. Please try again.');
-    } finally {
-      btn.textContent = original;
-      btn.disabled = false;
-    }
-  }
 </script>
 </body>
 </html>

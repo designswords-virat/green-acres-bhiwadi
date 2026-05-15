@@ -3,83 +3,219 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Green Acres Bhiwadi — Coming Soon</title>
-<meta name="description" content="Green Acres, Bhiwadi — Coming Soon." />
+<title>Green Acres Bhiwadi — Coming Soon | Reverence Realty</title>
+<meta name="description" content="Green Acres, Bhiwadi — NCR's New Land Capital. Coming Soon. A plotted township by Reverence Realty (Ashadeep Group)." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
+  :root {
+    --green-900: #0d3b1f;
+    --green-800: #145a2c;
+    --green-700: #1d6e3a;
+    --gold:      #b78b3a;
+    --gold-soft: #c79a4a;
+    --cream:     #faf4e7;
+    --sand:      #ead9bb;
+    --ink:       #1a2b22;
+    --muted:     #6b7a72;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    color: #fff;
-    background:
-      linear-gradient(180deg, rgba(15,46,31,0.55), rgba(15,46,31,0.9)),
-      url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 24px 140px;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    padding-bottom: 110px; /* space for sticky form on desktop */
   }
-  @media (max-width: 768px) {
-    body { padding-bottom: 360px; }
-  }
-  .wrap { max-width: 800px; }
-  .badge {
-    display: inline-block;
-    border: 1px solid rgba(255,255,255,0.4);
-    padding: 8px 22px;
-    border-radius: 999px;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    margin-bottom: 36px;
-    backdrop-filter: blur(4px);
-  }
-  h1 {
+  h1, h2, h3, .serif {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(56px, 12vw, 140px);
     font-weight: 600;
-    line-height: 1;
-    letter-spacing: 0.04em;
-    margin-bottom: 20px;
+    letter-spacing: -0.01em;
   }
-  h1 .accent { color: #8fc8a9; font-style: italic; font-weight: 500; }
-  .location {
-    font-size: 13px;
-    letter-spacing: 0.5em;
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 30;
+    padding: 18px 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav .logo { height: 56px; width: auto; }
+  .nav-cta {
+    background: var(--green-800);
+    color: #fff;
+    padding: 11px 22px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    opacity: 0.85;
-    margin-bottom: 50px;
+    transition: transform .2s, background .2s;
+    border: 1px solid var(--green-800);
   }
-  .location::before, .location::after {
-    content: "";
-    display: inline-block;
-    width: 40px; height: 1px;
-    background: #fff;
-    vertical-align: middle;
-    margin: 0 14px;
-    opacity: 0.5;
+  .nav-cta:hover { background: var(--green-900); transform: translateY(-1px); }
+
+  /* ===== HERO ===== */
+  .hero {
+    width: 100%;
+    background: var(--cream);
+    position: relative;
   }
-  .coming {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(22px, 3vw, 32px);
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #b78b3a;
+  .hero picture, .hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .hero .desktop-img { display: block; }
+  .hero .mobile-img  { display: none; }
+  @media (max-width: 700px) {
+    .hero .desktop-img { display: none; }
+    .hero .mobile-img  { display: block; }
+    .nav .logo { height: 44px; }
+    .nav-cta { padding: 9px 16px; font-size: 11px; }
+    .nav { padding: 14px 4vw; }
   }
 
-  /* STICKY ENQUIRY BAR */
+  /* ===== FOOTER ===== */
+  footer.site-footer {
+    background: var(--green-900);
+    color: rgba(255,255,255,0.78);
+    padding: 70px 6vw 0;
+    font-size: 14px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 50px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+  }
+  .footer-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 22px;
+    letter-spacing: 0.02em;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  .footer-col h4::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 38px; height: 2px;
+    background: var(--gold);
+  }
+  .footer-brand .footer-logo {
+    height: 70px;
+    width: auto;
+    margin-bottom: 18px;
+    filter: brightness(0) invert(1);
+  }
+  .footer-brand p {
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+    font-size: 14px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 12px; }
+  .footer-links a {
+    color: rgba(255,255,255,0.7);
+    transition: color .2s, padding-left .2s;
+    display: inline-block;
+  }
+  .footer-links a:hover { color: var(--gold); padding-left: 6px; }
+  .footer-links a::before {
+    content: "›";
+    color: var(--gold);
+    margin-right: 8px;
+    font-weight: bold;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .contact-icon {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(183,139,58,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .contact-text { color: rgba(255,255,255,0.78); font-size: 14px; }
+  .contact-text a { color: rgba(255,255,255,0.78); }
+  .contact-text a:hover { color: var(--gold); }
+  .contact-text strong { display: block; color: #fff; font-weight: 500; font-size: 13px; margin-bottom: 2px; }
+
+  .socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .socials a {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.75);
+    transition: all .2s;
+  }
+  .socials a:hover { background: var(--gold); color: #fff; border-color: var(--gold); transform: translateY(-2px); }
+
+  .disclaimer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 22px 0;
+    max-width: 1300px;
+    margin: 0 auto;
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+  }
+  .disclaimer strong { color: rgba(255,255,255,0.8); }
+
+  .copyright-bar {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 6vw;
+    margin: 0 -6vw;
+    background: rgba(0,0,0,0.2);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+  }
+  .copyright-bar .legal { display: flex; gap: 18px; flex-wrap: wrap; }
+  .copyright-bar .legal a:hover { color: var(--gold); }
+
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; padding-bottom: 40px; }
+    footer.site-footer { padding-top: 50px; }
+  }
+  @media (max-width: 560px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .copyright-bar { flex-direction: column; text-align: center; }
+    body { padding-bottom: 330px; }
+  }
+
+  /* ===== STICKY ENQUIRY BAR ===== */
   .enquiry-bar {
     position: fixed;
     left: 0; right: 0; bottom: 0;
-    background: #16432d;
-    border-top: 3px solid #b78b3a;
+    background: var(--green-900);
+    border-top: 3px solid var(--gold);
     padding: 14px 24px;
     z-index: 100;
     box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
@@ -107,15 +243,15 @@
   .enquiry-bar select:focus,
   .enquiry-bar input:focus {
     outline: none;
-    border-color: #b78b3a;
+    border-color: var(--gold);
     background: rgba(255,255,255,0.12);
   }
   .enquiry-bar input::placeholder { color: rgba(255,255,255,0.6); }
   .enquiry-bar select { color: rgba(255,255,255,0.7); cursor: pointer; }
-  .enquiry-bar select option { background: #16432d; color: #fff; }
+  .enquiry-bar select option { background: var(--green-900); color: #fff; }
   .enquiry-bar button {
     padding: 14px 36px;
-    background: #b78b3a;
+    background: var(--gold);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -129,11 +265,10 @@
     white-space: nowrap;
   }
   .enquiry-bar button:hover { background: #9c7530; transform: translateY(-1px); }
+  .enquiry-bar button:disabled { opacity: 0.6; cursor: not-allowed; }
 
   @media (max-width: 900px) {
-    .enquiry-bar form {
-      grid-template-columns: 1fr 1fr;
-    }
+    .enquiry-bar form { grid-template-columns: 1fr 1fr; }
     .enquiry-bar form > *:first-child,
     .enquiry-bar button { grid-column: 1 / -1; }
     .enquiry-bar { padding: 12px 16px; }
@@ -142,53 +277,154 @@
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <span class="badge">Bhiwadi · NCR</span>
-    <h1>Green <span class="accent">Acres</span></h1>
-    <div class="location">Bhiwadi, Rajasthan</div>
-    <div class="coming">Coming Soon</div>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <a href="#"><img class="logo" src="logo/logo1.png" alt="Reverence Realty by Ashadeep" /></a>
+  <a href="#register" class="nav-cta">Register Interest</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <img class="desktop-img" src="image/website-thumbnail.jpg.jpeg" alt="Green Acres Bhiwadi — Rajasthan knows us. NCR will remember. Coming Soon." />
+  <img class="mobile-img"  src="image/Mobile-thumbnail.jpg.jpeg"  alt="Green Acres Bhiwadi — Coming Soon in Bhiwadi." />
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-grid">
+
+    <!-- Brand -->
+    <div class="footer-col footer-brand">
+      <img class="footer-logo" src="logo/logo1.png" alt="Reverence Realty" />
+      <p>Green Acres is the next chapter from Reverence Realty by Ashadeep — a plotted township taking shape in Bhiwadi, NCR's emerging land capital. Designed for families who want space, security and a smart investment in one address.</p>
+      <div class="socials">
+        <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
+        <a href="https://wa.me/919999999999" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#register">Register Interest</a></li>
+        <li><a href="#">About the Project</a></li>
+        <li><a href="#">Location</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Disclaimer</a></li>
+      </ul>
+    </div>
+
+    <!-- Project -->
+    <div class="footer-col">
+      <h4>The Project</h4>
+      <ul class="footer-links">
+        <li><a href="#">Residential Land</a></li>
+        <li><a href="#">Investment Land</a></li>
+        <li><a href="#">Large Land Parcels</a></li>
+        <li><a href="#">Download Brochure</a></li>
+        <li><a href="#">Site Visit</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+
+      <div class="contact-item">
+        <span class="contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <div class="contact-text">
+          <strong>Site Address</strong>
+          Green Acres, Bhiwadi,<br/>District Khairthal-Tijara, Rajasthan
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </span>
+        <div class="contact-text">
+          <strong>Sales Enquiry</strong>
+          <a href="tel:+919999999999">+91 99999 99999</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </span>
+        <div class="contact-text">
+          <strong>Email</strong>
+          <a href="mailto:designs.words@gmail.com">designs.words@gmail.com</a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="enquiry-bar">
-    <form id="enquiryForm" onsubmit="submitEnquiry(event)">
-      <select name="interest" required>
-        <option value="">Interested in</option>
-        <option>Residential Land</option>
-        <option>Investment Land</option>
-        <option>Large Land Parcel</option>
-        <option>Need Details</option>
-      </select>
-      <input name="name" type="text" placeholder="Name" required />
-      <input name="contact" type="tel" placeholder="Contact" required pattern="[0-9]{10}" />
-      <input name="email" type="email" placeholder="Email" required />
-      <button type="submit" id="submitBtn">Submit</button>
-    </form>
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <strong>Disclaimer:</strong> The information presented on this website is purely indicative and for representational purposes only. Plans, layouts, specifications, dimensions, renders and amenities shown are conceptual and not legally binding. Any acquisition or booking will be governed solely by the terms of the formal application form and agreement entered between parties. The project is under planning and RERA registration is in process. Images are artistic impressions of the proposed development.
   </div>
 
-  <script>
-    // Paste your Google Apps Script Web App URL here (see setup instructions)
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNJjGATsrIUbA8KThrKwt-h7iNc7Ewq3KF9lR9BufuNDFy4ZS4UwSCVtkm70hFGzlH/exec";
+  <!-- Copyright bar -->
+  <div class="copyright-bar">
+    <div>© <span id="year"></span> Green Acres · Reverence Realty by Ashadeep<sup>®</sup>. All rights reserved.</div>
+    <div class="legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
 
-    async function submitEnquiry(e) {
-      e.preventDefault();
-      const form = document.getElementById('enquiryForm');
-      const btn = document.getElementById('submitBtn');
-      const original = btn.textContent;
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
+<!-- ===== STICKY ENQUIRY BAR ===== -->
+<div class="enquiry-bar" id="register">
+  <form id="enquiryForm" onsubmit="submitEnquiry(event)">
+    <select name="interest" required>
+      <option value="">Interested in</option>
+      <option>Residential Land</option>
+      <option>Investment Land</option>
+      <option>Large Land Parcel</option>
+      <option>Need Details</option>
+    </select>
+    <input name="name" type="text" placeholder="Name" required />
+    <input name="contact" type="tel" placeholder="Contact" required pattern="[0-9]{10}" />
+    <input name="email" type="email" placeholder="Email" required />
+    <button type="submit" id="submitBtn">Submit</button>
+  </form>
+</div>
 
-      try {
-        const formData = new FormData(form);
-        await fetch(SCRIPT_URL, { method: 'POST', body: formData });
-        alert('Thank you! Our team will contact you shortly.');
-        form.reset();
-      } catch (err) {
-        alert('Something went wrong. Please try again or call us directly.');
-      } finally {
-        btn.textContent = original;
-        btn.disabled = false;
-      }
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNJjGATsrIUbA8KThrKwt-h7iNc7Ewq3KF9lR9BufuNDFy4ZS4UwSCVtkm70hFGzlH/exec";
+
+  async function submitEnquiry(e) {
+    e.preventDefault();
+    const form = document.getElementById('enquiryForm');
+    const btn = document.getElementById('submitBtn');
+    const original = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData(form);
+      await fetch(SCRIPT_URL, { method: 'POST', body: formData });
+      alert('Thank you! Our team will contact you shortly.');
+      form.reset();
+    } catch (err) {
+      alert('Something went wrong. Please try again or call us directly.');
+    } finally {
+      btn.textContent = original;
+      btn.disabled = false;
     }
-  </script>
+  }
+</script>
 </body>
 </html>

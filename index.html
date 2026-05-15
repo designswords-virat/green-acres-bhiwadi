@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Green Acres Bhiwadi — Coming Soon</title>
+<meta name="description" content="Green Acres, Bhiwadi — Coming Soon." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #fff;
+    background:
+      linear-gradient(180deg, rgba(15,46,31,0.55), rgba(15,46,31,0.9)),
+      url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px 140px;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (max-width: 768px) {
+    body { padding-bottom: 360px; }
+  }
+  .wrap { max-width: 800px; }
+  .badge {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 8px 22px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    backdrop-filter: blur(4px);
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 12vw, 140px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+  h1 .accent { color: #8fc8a9; font-style: italic; font-weight: 500; }
+  .location {
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 50px;
+  }
+  .location::before, .location::after {
+    content: "";
+    display: inline-block;
+    width: 40px; height: 1px;
+    background: #fff;
+    vertical-align: middle;
+    margin: 0 14px;
+    opacity: 0.5;
+  }
+  .coming {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #b78b3a;
+  }
+
+  /* STICKY ENQUIRY BAR */
+  .enquiry-bar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: #16432d;
+    border-top: 3px solid #b78b3a;
+    padding: 14px 24px;
+    z-index: 100;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+  }
+  .enquiry-bar form {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.2fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+  .enquiry-bar select,
+  .enquiry-bar input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    transition: border .2s, background .2s;
+  }
+  .enquiry-bar select:focus,
+  .enquiry-bar input:focus {
+    outline: none;
+    border-color: #b78b3a;
+    background: rgba(255,255,255,0.12);
+  }
+  .enquiry-bar input::placeholder { color: rgba(255,255,255,0.6); }
+  .enquiry-bar select { color: rgba(255,255,255,0.7); cursor: pointer; }
+  .enquiry-bar select option { background: #16432d; color: #fff; }
+  .enquiry-bar button {
+    padding: 14px 36px;
+    background: #b78b3a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    white-space: nowrap;
+  }
+  .enquiry-bar button:hover { background: #9c7530; transform: translateY(-1px); }
+
+  @media (max-width: 900px) {
+    .enquiry-bar form {
+      grid-template-columns: 1fr 1fr;
+    }
+    .enquiry-bar form > *:first-child,
+    .enquiry-bar button { grid-column: 1 / -1; }
+    .enquiry-bar { padding: 12px 16px; }
+    .enquiry-bar select, .enquiry-bar input { padding: 12px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <span class="badge">Bhiwadi · NCR</span>
+    <h1>Green <span class="accent">Acres</span></h1>
+    <div class="location">Bhiwadi, Rajasthan</div>
+    <div class="coming">Coming Soon</div>
+  </div>
+
+  <div class="enquiry-bar">
+    <form id="enquiryForm" onsubmit="submitEnquiry(event)">
+      <select name="interest" required>
+        <option value="">Interested in</option>
+        <option>Residential Land</option>
+        <option>Investment Land</option>
+        <option>Large Land Parcel</option>
+        <option>Need Details</option>
+      </select>
+      <input name="name" type="text" placeholder="Name" required />
+      <input name="contact" type="tel" placeholder="Contact" required pattern="[0-9]{10}" />
+      <input name="email" type="email" placeholder="Email" required />
+      <button type="submit" id="submitBtn">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Paste your Google Apps Script Web App URL here (see setup instructions)
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNJjGATsrIUbA8KThrKwt-h7iNc7Ewq3KF9lR9BufuNDFy4ZS4UwSCVtkm70hFGzlH/exec";
+
+    async function submitEnquiry(e) {
+      e.preventDefault();
+      const form = document.getElementById('enquiryForm');
+      const btn = document.getElementById('submitBtn');
+      const original = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      try {
+        const formData = new FormData(form);
+        await fetch(SCRIPT_URL, { method: 'POST', body: formData });
+        alert('Thank you! Our team will contact you shortly.');
+        form.reset();
+      } catch (err) {
+        alert('Something went wrong. Please try again or call us directly.');
+      } finally {
+        btn.textContent = original;
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

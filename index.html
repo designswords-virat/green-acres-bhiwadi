@@ -114,129 +114,149 @@
   /* ===== FOOTER ===== */
   footer.site-footer {
     background: var(--green-900);
-    color: rgba(255,255,255,0.78);
+    color: #f1ead7;
     padding: 70px 6vw 0;
-    font-size: 14px;
+    font-family: 'Inter', sans-serif;
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-    gap: 50px;
-    max-width: 1300px;
+    grid-template-columns: 1.1fr 0.9fr 1.6fr;
+    gap: 60px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding-bottom: 50px;
+    padding-bottom: 60px;
   }
   .footer-col h4 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: #fff;
-    margin-bottom: 22px;
-    letter-spacing: 0.02em;
-    position: relative;
-    padding-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #d9c98a;
+    margin-bottom: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
-  .footer-col h4::after {
-    content: "";
-    position: absolute;
-    left: 0; bottom: 0;
-    width: 38px; height: 2px;
-    background: var(--gold);
+  .footer-col .info-block { margin-bottom: 26px; }
+  .footer-col .info-block p,
+  .footer-col .info-block a {
+    color: #e9e0c5;
+    font-size: 14.5px;
+    line-height: 1.65;
+    text-decoration: none;
   }
-  .footer-brand .footer-logo {
-    height: 70px;
-    width: auto;
-    margin-bottom: 18px;
-    filter: brightness(0) invert(1);
+  .footer-col .info-block a:hover { color: #d9c98a; }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
-  .footer-brand p {
-    color: rgba(255,255,255,0.65);
-    line-height: 1.75;
-    font-size: 14px;
-  }
-  .footer-links { list-style: none; }
-  .footer-links li { margin-bottom: 12px; }
   .footer-links a {
-    color: rgba(255,255,255,0.7);
-    transition: color .2s, padding-left .2s;
-    display: inline-block;
+    color: #f1ead7;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color .2s;
   }
-  .footer-links a:hover { color: var(--gold); padding-left: 6px; }
-  .footer-links a::before {
-    content: "›";
-    color: var(--gold);
-    margin-right: 8px;
-    font-weight: bold;
-  }
+  .footer-links a:hover { color: #d9c98a; }
 
-  .contact-item {
+  .stay-updated-row {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 16px;
-    line-height: 1.6;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
   }
-  .contact-icon {
-    flex-shrink: 0;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(183,139,58,0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    display: flex; align-items: center; justify-content: center;
+  .stay-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: #d9c98a;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
-  .contact-text { color: rgba(255,255,255,0.78); font-size: 14px; }
-  .contact-text a { color: rgba(255,255,255,0.78); }
-  .contact-text a:hover { color: var(--gold); }
-  .contact-text strong { display: block; color: #fff; font-weight: 500; font-size: 13px; margin-bottom: 2px; }
-
-  .socials {
+  .subscribe-pill {
+    flex: 1;
+    min-width: 280px;
     display: flex;
-    gap: 10px;
-    margin-top: 22px;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 5px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
   }
-  .socials a {
-    width: 38px; height: 38px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.15);
-    display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.75);
-    transition: all .2s;
+  .subscribe-pill input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 12px 22px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: #6b6b6b;
+    outline: none;
   }
-  .socials a:hover { background: var(--gold); color: #fff; border-color: var(--gold); transform: translateY(-2px); }
+  .subscribe-pill input::placeholder { color: #9c9c9c; letter-spacing: 0.04em; }
+  .subscribe-pill button {
+    background: #ffffff;
+    color: #2a2a2a;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 999px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .subscribe-pill button:hover { background: var(--green-800); color: #fff; }
 
-  .disclaimer {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 22px 0;
-    max-width: 1300px;
+  .footer-bottom {
+    max-width: 1400px;
     margin: 0 auto;
-    font-size: 12px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.7;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding: 26px 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: #e9e0c5;
   }
-  .disclaimer strong { color: rgba(255,255,255,0.8); }
-
-  .copyright-bar {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 20px 6vw;
-    margin: 0 -6vw;
-    background: rgba(0,0,0,0.2);
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 12px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.55);
+  .footer-bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
   }
-  .copyright-bar .legal { display: flex; gap: 18px; flex-wrap: wrap; }
-  .copyright-bar .legal a:hover { color: var(--gold); }
+  .footer-bottom-left .sep {
+    width: 1px;
+    height: 18px;
+    background: rgba(255,255,255,0.25);
+  }
+  .footer-bottom-left a:hover { color: #d9c98a; }
+  .footer-socials { display: flex; gap: 16px; }
+  .footer-socials a {
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    color: #f1ead7;
+    transition: color .2s, transform .2s;
+  }
+  .footer-socials a:hover { color: #d9c98a; transform: translateY(-2px); }
 
-  @media (max-width: 900px) {
-    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; padding-bottom: 40px; }
-    footer.site-footer { padding-top: 50px; }
+  @media (max-width: 1000px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 50px; }
+    .footer-grid .col-updated { grid-column: 1 / -1; }
     body { padding-bottom: 340px; }
   }
-  @media (max-width: 560px) {
-    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
-    .copyright-bar { flex-direction: column; text-align: center; }
+  @media (max-width: 600px) {
+    footer.site-footer { padding: 50px 6vw 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; padding-bottom: 40px; }
+    .stay-updated-row { flex-direction: column; align-items: stretch; gap: 14px; }
+    .stay-label { text-align: center; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .footer-bottom-left { justify-content: center; }
   }
 
   /* ===== STICKY ENQUIRY BAR ===== */
@@ -308,7 +328,7 @@
 
 <!-- ===== NAV ===== -->
 <nav class="nav">
-  <a href="#"><img class="logo" src="logo/logo1.png" alt="Reverence Realty by Ashadeep" /></a>
+  <a href="#"><img class="logo" src="logo/reverence%20ashadeep.png" alt="Reverence Realty by Ashadeep" /></a>
   <a href="tel:+919999999999" class="nav-call" aria-label="Call sales">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
     <span class="call-text">+91 99999 99999</span>
@@ -325,91 +345,58 @@
 <footer class="site-footer">
   <div class="footer-grid">
 
-    <!-- Brand -->
-    <div class="footer-col footer-brand">
-      <img class="footer-logo" src="logo/logo1.png" alt="Reverence Realty" />
-      <p>Green Acres is the next chapter from Reverence Realty by Ashadeep — a plotted township taking shape in Bhiwadi, NCR's emerging land capital. Designed for families who want space, security and a smart investment in one address.</p>
-      <div class="socials">
-        <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg></a>
-        <a href="https://wa.me/919999999999" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></a>
-      </div>
-    </div>
-
-    <!-- Quick Links -->
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <ul class="footer-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#register">Register Interest</a></li>
-        <li><a href="#">About the Project</a></li>
-        <li><a href="#">Location</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Disclaimer</a></li>
-      </ul>
-    </div>
-
-    <!-- Project -->
-    <div class="footer-col">
-      <h4>The Project</h4>
-      <ul class="footer-links">
-        <li><a href="#">Residential Land</a></li>
-        <li><a href="#">Investment Land</a></li>
-        <li><a href="#">Large Land Parcels</a></li>
-        <li><a href="#">Download Brochure</a></li>
-        <li><a href="#">Site Visit</a></li>
-      </ul>
-    </div>
-
     <!-- Contact -->
     <div class="footer-col">
-      <h4>Get in Touch</h4>
-
-      <div class="contact-item">
-        <span class="contact-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </span>
-        <div class="contact-text">
-          <strong>Site Address</strong>
-          Green Acres, Bhiwadi,<br/>District Khairthal-Tijara, Rajasthan
-        </div>
+      <div class="info-block">
+        <h4>Phone</h4>
+        <p><a href="tel:+919309361000">+91-9309361000</a></p>
       </div>
-
-      <div class="contact-item">
-        <span class="contact-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        </span>
-        <div class="contact-text">
-          <strong>Sales Enquiry</strong>
-          <a href="tel:+919999999999">+91 99999 99999</a>
-        </div>
+      <div class="info-block">
+        <h4>Email</h4>
+        <p><a href="mailto:info@ashadeepgroup.com">info@ashadeepgroup.com</a></p>
       </div>
+      <div class="info-block">
+        <h4>Address</h4>
+        <p>6-D, Corporate Tower A2, Jawahar Lal Nehru Marg, Near Jawahar Circle, Jaipur 302017<br/>Landline: 0141 – 4112190</p>
+      </div>
+    </div>
 
-      <div class="contact-item">
-        <span class="contact-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </span>
-        <div class="contact-text">
-          <strong>Email</strong>
-          <a href="mailto:designs.words@gmail.com">designs.words@gmail.com</a>
-        </div>
+    <!-- Pages -->
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Stay Updated -->
+    <div class="footer-col col-updated">
+      <div class="stay-updated-row">
+        <div class="stay-label">Stay Updated</div>
+        <form class="subscribe-pill" onsubmit="event.preventDefault(); alert('Subscribed. Thank you!'); this.reset();">
+          <input type="email" placeholder="Enter Your Email Address" required />
+          <button type="submit">Subscribe</button>
+        </form>
       </div>
     </div>
   </div>
 
-  <!-- Disclaimer -->
-  <div class="disclaimer">
-    <strong>Disclaimer:</strong> The information presented on this website is purely indicative and for representational purposes only. Plans, layouts, specifications, dimensions, renders and amenities shown are conceptual and not legally binding. Any acquisition or booking will be governed solely by the terms of the formal application form and agreement entered between parties. The project is under planning and RERA registration is in process. Images are artistic impressions of the proposed development.
-  </div>
-
-  <!-- Copyright bar -->
-  <div class="copyright-bar">
-    <div>© <span id="year"></span> Green Acres · Reverence Realty by Ashadeep<sup>®</sup>. All rights reserved.</div>
-    <div class="legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Sitemap</a>
+  <!-- Bottom row -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <span>© <span id="year"></span> Reverence Value Homes All right reserved</span>
+      <span class="sep"></span>
+      <span>Designed By Design &amp; Words</span>
+    </div>
+    <div class="footer-socials">
+      <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+      <a href="#" aria-label="Twitter"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
     </div>
   </div>
 </footer>

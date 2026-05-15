@@ -365,11 +365,12 @@
     <div class="footer-col">
       <h4>Pages</h4>
       <ul class="footer-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="https://reverencerealty.in/" target="_blank" rel="noopener">Home</a></li>
+        <li><a href="https://reverencerealty.in/about" target="_blank" rel="noopener">About</a></li>
+        <li><a href="https://reverencerealty.in/properties" target="_blank" rel="noopener">Projects</a></li>
+        <li><a href="https://reverencerealty.in/blog" target="_blank" rel="noopener">Blog</a></li>
+        <li><a href="https://reverencerealty.in/career" target="_blank" rel="noopener">Career</a></li>
+        <li><a href="https://reverencerealty.in/contact" target="_blank" rel="noopener">Contact</a></li>
       </ul>
     </div>
 
@@ -377,9 +378,9 @@
     <div class="footer-col col-updated">
       <div class="stay-updated-row">
         <div class="stay-label">Stay Updated</div>
-        <form class="subscribe-pill" onsubmit="event.preventDefault(); alert('Subscribed. Thank you!'); this.reset();">
-          <input type="email" placeholder="Enter Your Email Address" required />
-          <button type="submit">Subscribe</button>
+        <form class="subscribe-pill" id="subscribeForm" onsubmit="submitSubscribe(event)">
+          <input type="email" name="email" placeholder="Enter Your Email Address" required />
+          <button type="submit" id="subscribeBtn">Subscribe</button>
         </form>
       </div>
     </div>
@@ -442,6 +443,32 @@
       form.reset();
     } catch (err) {
       alert('Something went wrong. Please try again or call us directly.');
+    } finally {
+      btn.textContent = original;
+      btn.disabled = false;
+    }
+  }
+
+  async function submitSubscribe(e) {
+    e.preventDefault();
+    const form = document.getElementById('subscribeForm');
+    const btn = document.getElementById('subscribeBtn');
+    const original = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData(form);
+      formData.append('type', 'subscribe');
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      });
+      alert('Subscribed! We will keep you updated.');
+      form.reset();
+    } catch (err) {
+      alert('Something went wrong. Please try again.');
     } finally {
       btn.textContent = original;
       btn.disabled = false;

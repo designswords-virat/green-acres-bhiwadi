@@ -1,49 +1,80 @@
 /**
- * Green Acres Bhiwadi — Lead Capture
- * This script receives form submissions, writes them to the Google Sheet,
- * and emails a notification.
+ * Green Acres Bhiwadi — Lead + Subscriber Capture
  *
- * SETUP: see setup-instructions.md
+ * Routes incoming POSTs to one of two sheet tabs:
+ *   - default          → first sheet (leads, full enquiry form)
+ *   - type=subscribe   → "Subscribers" tab (newsletter email-only)
+ *
+ * Sends a notification email for either type.
  */
 
 // === EDIT THIS ===
-const NOTIFY_EMAIL = "designs.words@gmail.com"; // where lead notifications go
+const NOTIFY_EMAIL = "designs.words@gmail.com";
 // =================
 
 function doPost(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-
-    // Add header row on first submission
-    if (sheet.getLastRow() === 0) {
-      sheet.appendRow(["Timestamp", "Interested In", "Name", "Contact", "Email"]);
-      sheet.getRange("A1:E1").setFontWeight("bold").setBackground("#16432d").setFontColor("#ffffff");
-      sheet.setFrozenRows(1);
-    }
-
     const p = e.parameter;
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
     const timestamp = new Date();
 
-    sheet.appendRow([
-      timestamp,
-      p.interest || "",
-      p.name || "",
-      p.contact || "",
-      p.email || ""
-    ]);
+    if (p.type === "subscribe") {
+      // ====== SUBSCRIBER (newsletter pill) ======
+      let sheet = ss.getSheetByName("Subscribers");
+      if (!sheet) sheet = ss.insertSheet("Subscribers");
 
-    // Send notification email
-    const subject = "New Enquiry — Green Acres Bhiwadi (" + (p.interest || "—") + ")";
-    const body =
-      "A new enquiry has been submitted from your Green Acres landing page:\n\n" +
-      "Interested in : " + (p.interest || "—") + "\n" +
-      "Name          : " + (p.name || "—") + "\n" +
-      "Contact       : " + (p.contact || "—") + "\n" +
-      "Email         : " + (p.email || "—") + "\n\n" +
-      "Received      : " + timestamp.toString() + "\n\n" +
-      "— Green Acres Lead Bot";
+      if (sheet.getLastRow() === 0) {
+        sheet.appendRow(["Timestamp", "Email"]);
+        sheet.getRange("A1:B1")
+          .setFontWeight("bold")
+          .setBackground("#16432d")
+          .setFontColor("#ffffff");
+        sheet.setFrozenRows(1);
+      }
 
-    MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
+      sheet.appendRow([timestamp, p.email || ""]);
+
+      MailApp.sendEmail(
+        NOTIFY_EMAIL,
+        "New Subscriber — Green Acres Bhiwadi",
+        "A new email subscriber from your Green Acres landing page:\n\n" +
+        "Email     : " + (p.email || "—") + "\n" +
+        "Received  : " + timestamp.toString() + "\n\n" +
+        "— Green Acres Lead Bot"
+      );
+    } else {
+      // ====== LEAD (full enquiry form) ======
+      const sheet = ss.getSheets()[0]; // first tab
+
+      if (sheet.getLastRow() === 0) {
+        sheet.appendRow(["Timestamp", "Interested In", "Name", "Contact", "Email"]);
+        sheet.getRange("A1:E1")
+          .setFontWeight("bold")
+          .setBackground("#16432d")
+          .setFontColor("#ffffff");
+        sheet.setFrozenRows(1);
+      }
+
+      sheet.appendRow([
+        timestamp,
+        p.interest || "",
+        p.name || "",
+        p.contact || "",
+        p.email || ""
+      ]);
+
+      const subject = "New Enquiry — Green Acres Bhiwadi (" + (p.interest || "—") + ")";
+      const body =
+        "A new enquiry has been submitted from your Green Acres landing page:\n\n" +
+        "Interested in : " + (p.interest || "—") + "\n" +
+        "Name          : " + (p.name || "—") + "\n" +
+        "Contact       : " + (p.contact || "—") + "\n" +
+        "Email         : " + (p.email || "—") + "\n\n" +
+        "Received      : " + timestamp.toString() + "\n\n" +
+        "— Green Acres Lead Bot";
+
+      MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
+    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
@@ -55,7 +86,6 @@ function doPost(e) {
   }
 }
 
-// Optional GET handler — lets you open the deployed URL in a browser to verify it's live.
 function doGet() {
   return ContentService.createTextOutput("Green Acres lead endpoint is live.");
 }

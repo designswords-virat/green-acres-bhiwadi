@@ -446,7 +446,11 @@
 
     try {
       const formData = new FormData(form);
-      await fetch(SCRIPT_URL, { method: 'POST', body: formData });
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      });
       alert('Thank you! Our team will contact you shortly.');
       form.reset();
     } catch (err) {

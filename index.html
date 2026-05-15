@@ -40,31 +40,31 @@
 
   /* ===== NAV ===== */
   .nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 110;
-    padding: 14px 5vw;
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(250, 244, 231, 0.92);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(13, 59, 31, 0.08);
-    box-shadow: 0 2px 16px rgba(13, 59, 31, 0.06);
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 30;
+    padding: 18px 5vw;
   }
   .nav .logo { height: 56px; width: auto; }
-  .nav-right { display: flex; align-items: center; gap: 14px; }
+
+  /* Floating click-to-call — stays pinned while scrolling */
   .nav-call {
+    position: fixed;
+    top: 18px;
+    right: 5vw;
+    z-index: 120;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 10px 18px;
     border-radius: 999px;
-    background: rgba(255,255,255,0.85);
+    background: #ffffff;
     border: 1px solid var(--green-800);
     color: var(--green-900);
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.04em;
+    box-shadow: 0 4px 16px rgba(13, 59, 31, 0.18);
     transition: background .2s, transform .2s, color .2s;
   }
   .nav-call svg { color: var(--green-800); }

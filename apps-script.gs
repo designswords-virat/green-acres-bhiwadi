@@ -9,7 +9,7 @@
  */
 
 // === EDIT THIS ===
-const NOTIFY_EMAIL = "designs.words@gmail.com";
+const NOTIFY_EMAIL = "realtyreverence@gmail.com";
 // =================
 
 function doPost(e) {

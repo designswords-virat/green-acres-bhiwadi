@@ -9,8 +9,7 @@
  */
 
 // === EDIT THIS ===
-// Notifications go to both addresses (comma-separated).
-const NOTIFY_EMAIL = "realtyreverence@gmail.com,designs.words@gmail.com";
+const NOTIFY_EMAIL = "realtyreverence@gmail.com";
 // =================
 
 function doPost(e) {

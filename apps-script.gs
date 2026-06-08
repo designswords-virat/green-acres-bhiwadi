@@ -1,16 +1,9 @@
 /**
  * Green Acres Bhiwadi — Lead Capture
  *
- * Writes form submissions to the first sheet of THIS spreadsheet,
- * and sends an email notification.
- *
- * Setup: this script must be created from INSIDE a Google Sheet
- * (Extensions → Apps Script). It will write to that sheet automatically.
+ * Writes form submissions to the first sheet of THIS spreadsheet.
+ * No email notification — leads live in the Sheet only.
  */
-
-// === EDIT THIS ===
-const NOTIFY_EMAIL = "designs.words@gmail.com";
-// =================
 
 function doPost(e) {
   try {
@@ -34,18 +27,6 @@ function doPost(e) {
       p.contact || "",
       p.email || ""
     ]);
-
-    const subject = "New Enquiry — Green Acres Bhiwadi (" + (p.interest || "—") + ")";
-    const body =
-      "A new enquiry has been submitted from your Green Acres landing page:\n\n" +
-      "Interested in : " + (p.interest || "—") + "\n" +
-      "Name          : " + (p.name || "—") + "\n" +
-      "Contact       : " + (p.contact || "—") + "\n" +
-      "Email         : " + (p.email || "—") + "\n\n" +
-      "Received      : " + now.toString() + "\n\n" +
-      "— Green Acres Lead Bot";
-
-    MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))

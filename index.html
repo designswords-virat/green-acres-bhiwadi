@@ -515,6 +515,11 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
   thanksOverlay.addEventListener('click', (e) => { if (e.target === thanksOverlay) hideThanks(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideThanks(); });
 
+  // Preview the thank-you popup by visiting ?thanks=1
+  if (new URLSearchParams(window.location.search).has('thanks')) {
+    showThanks();
+  }
+
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwisJwPXWvenShaj0DQfsNGHm-NnfntEGqTIWaPXqaK3wHWAXWjVurq3TybyYf31KvO/exec";
 
   async function submitEnquiry(e) {

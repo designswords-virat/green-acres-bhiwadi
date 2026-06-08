@@ -1,52 +1,51 @@
 /**
- * Green Acres Bhiwadi — Email-only Lead Relay
+ * Green Acres Bhiwadi — Lead Capture
  *
- * Receives the form POST and emails the lead to RECIPIENT_EMAIL.
- * No Google Sheet, no extra setup. Sends FROM your Google account
- * (so the recipient does not need to confirm anything).
+ * Writes form submissions to the first sheet of THIS spreadsheet,
+ * and sends an email notification.
  *
- * Setup: see setup-instructions.md
+ * Setup: this script must be created from INSIDE a Google Sheet
+ * (Extensions → Apps Script). It will write to that sheet automatically.
  */
 
 // === EDIT THIS ===
-const RECIPIENT_EMAIL = "realtyreverence@gmail.com";
+const NOTIFY_EMAIL = "designs.words@gmail.com";
 // =================
 
 function doPost(e) {
   try {
     const p = e.parameter;
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    const now = new Date();
+
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(["Timestamp", "Interested In", "Name", "Contact", "Email"]);
+      sheet.getRange("A1:E1")
+        .setFontWeight("bold")
+        .setBackground("#0d3b1f")
+        .setFontColor("#ffffff");
+      sheet.setFrozenRows(1);
+    }
+
+    sheet.appendRow([
+      now,
+      p.interest || "",
+      p.name || "",
+      p.contact || "",
+      p.email || ""
+    ]);
+
     const subject = "New Enquiry — Green Acres Bhiwadi (" + (p.interest || "—") + ")";
+    const body =
+      "A new enquiry has been submitted from your Green Acres landing page:\n\n" +
+      "Interested in : " + (p.interest || "—") + "\n" +
+      "Name          : " + (p.name || "—") + "\n" +
+      "Contact       : " + (p.contact || "—") + "\n" +
+      "Email         : " + (p.email || "—") + "\n\n" +
+      "Received      : " + now.toString() + "\n\n" +
+      "— Green Acres Lead Bot";
 
-    const html =
-      "<div style='font-family:Arial,sans-serif;color:#1a2b22;max-width:560px'>" +
-        "<h2 style='color:#0d3b1f;border-bottom:2px solid #b78b3a;padding-bottom:10px;margin:0 0 18px'>" +
-          "New Enquiry — Green Acres Bhiwadi" +
-        "</h2>" +
-        "<table style='font-size:14px;border-collapse:collapse;width:100%'>" +
-          "<tr><td style='padding:8px 14px 8px 0;color:#6b7a72;width:130px'>Interested in</td>" +
-              "<td style='padding:8px 0'><strong>" + escapeHtml(p.interest || "—") + "</strong></td></tr>" +
-          "<tr><td style='padding:8px 14px 8px 0;color:#6b7a72'>Name</td>" +
-              "<td style='padding:8px 0'>" + escapeHtml(p.name || "—") + "</td></tr>" +
-          "<tr><td style='padding:8px 14px 8px 0;color:#6b7a72'>Contact</td>" +
-              "<td style='padding:8px 0'><a href='tel:" + escapeHtml(p.contact || "") + "' style='color:#16432d'>" +
-                escapeHtml(p.contact || "—") + "</a></td></tr>" +
-          "<tr><td style='padding:8px 14px 8px 0;color:#6b7a72'>Email</td>" +
-              "<td style='padding:8px 0'><a href='mailto:" + escapeHtml(p.email || "") + "' style='color:#16432d'>" +
-                escapeHtml(p.email || "—") + "</a></td></tr>" +
-        "</table>" +
-        "<p style='font-size:12px;color:#999;margin-top:30px'>" +
-          "Sent automatically from green-acres-bhiwadi.vercel.app" +
-        "</p>" +
-      "</div>";
-
-    const mailOptions = {
-      to: RECIPIENT_EMAIL,
-      subject: subject,
-      htmlBody: html
-    };
-    if (p.email) mailOptions.replyTo = p.email;
-
-    MailApp.sendEmail(mailOptions);
+    MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
@@ -60,13 +59,4 @@ function doPost(e) {
 
 function doGet() {
   return ContentService.createTextOutput("Green Acres lead endpoint is live.");
-}
-
-function escapeHtml(s) {
-  return String(s)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 }

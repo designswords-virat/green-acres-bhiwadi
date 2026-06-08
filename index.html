@@ -409,22 +409,7 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
         mode: 'no-cors',
         body: formData
       });
-
-      let redirected = false;
-      const goToThanks = () => {
-        if (redirected) return;
-        redirected = true;
-        window.location.href = '/thank-you/';
-      };
-
-      if (window.fbq) {
-        // Wait for Meta Pixel to confirm Lead event was sent, then redirect
-        fbq('track', 'Lead', {}, { eventCallback: goToThanks });
-        // Fallback in case Pixel is blocked (adblockers, network)
-        setTimeout(goToThanks, 1500);
-      } else {
-        goToThanks();
-      }
+      window.location.href = '/thank-you/';
     } catch (err) {
       alert('Something went wrong. Please try again or call us directly.');
       btn.textContent = original;

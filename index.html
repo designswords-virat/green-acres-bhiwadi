@@ -303,6 +303,103 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
     .enquiry-bar select, .enquiry-bar input { padding: 12px 14px; font-size: 13px; }
     .enquiry-bar button { padding: 12px; }
   }
+
+  /* ===== THANK YOU MODAL ===== */
+  .thanks-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 59, 31, 0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+  .thanks-overlay.show { display: flex; opacity: 1; }
+  .thanks-card {
+    background: #faf4e7;
+    border-radius: 14px;
+    max-width: 440px;
+    width: 100%;
+    padding: 50px 36px 40px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    transform: translateY(20px) scale(0.96);
+    transition: transform .35s cubic-bezier(.2,.9,.3,1.2);
+  }
+  .thanks-overlay.show .thanks-card { transform: translateY(0) scale(1); }
+  .thanks-close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(13, 59, 31, 0.08);
+    color: var(--green-900);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s;
+  }
+  .thanks-close:hover { background: rgba(13, 59, 31, 0.18); }
+  .thanks-icon {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: var(--green-800);
+    color: #fff;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .thanks-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--green-900);
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .thanks-title .accent {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .thanks-msg {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .thanks-msg strong { color: var(--green-900); font-weight: 600; }
+  .thanks-btn {
+    background: var(--green-800);
+    color: #fff;
+    border: none;
+    padding: 13px 36px;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+  }
+  .thanks-btn:hover { background: var(--green-900); transform: translateY(-1px); }
+  @media (max-width: 480px) {
+    .thanks-card { padding: 40px 24px 32px; }
+    .thanks-title { font-size: 30px; }
+    .thanks-icon { width: 64px; height: 64px; }
+  }
 </style>
 </head>
 <body>
@@ -388,8 +485,35 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
   </form>
 </div>
 
+<!-- THANK YOU MODAL -->
+<div class="thanks-overlay" id="thanksOverlay" role="dialog" aria-modal="true" aria-labelledby="thanksTitle">
+  <div class="thanks-card">
+    <button class="thanks-close" id="thanksClose" aria-label="Close">&times;</button>
+    <div class="thanks-icon">
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="thanks-title" id="thanksTitle">Thank <span class="accent">You</span></h2>
+    <p class="thanks-msg">Your enquiry has been received.<br/><strong>Our team will reach out shortly.</strong></p>
+    <button class="thanks-btn" id="thanksBtnClose">Close</button>
+  </div>
+</div>
+
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  const thanksOverlay = document.getElementById('thanksOverlay');
+  function showThanks() {
+    thanksOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function hideThanks() {
+    thanksOverlay.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('thanksClose').addEventListener('click', hideThanks);
+  document.getElementById('thanksBtnClose').addEventListener('click', hideThanks);
+  thanksOverlay.addEventListener('click', (e) => { if (e.target === thanksOverlay) hideThanks(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideThanks(); });
 
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwisJwPXWvenShaj0DQfsNGHm-NnfntEGqTIWaPXqaK3wHWAXWjVurq3TybyYf31KvO/exec";
 
@@ -408,8 +532,9 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
         mode: 'no-cors',
         body: formData
       });
-      alert('Thank you! Our team will contact you shortly.');
+      if (window.fbq) fbq('track', 'Lead');
       form.reset();
+      showThanks();
     } catch (err) {
       alert('Something went wrong. Please try again or call us directly.');
     } finally {

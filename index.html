@@ -355,9 +355,6 @@
 <!-- ===== STICKY ENQUIRY BAR ===== -->
 <div class="enquiry-bar" id="register">
   <form id="enquiryForm" onsubmit="submitEnquiry(event)">
-    <input type="hidden" name="_subject" value="New Enquiry — Green Acres Bhiwadi" />
-    <input type="hidden" name="_captcha" value="false" />
-    <input type="hidden" name="_template" value="table" />
     <select name="interest" required>
       <option value="">Interested in</option>
       <option>Residential Land</option>
@@ -375,7 +372,8 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  const FORM_ENDPOINT = "https://formsubmit.co/ajax/designs.words@gmail.com";
+  // Paste your new Apps Script Web App URL here after deploying (see instructions in chat)
+  const SCRIPT_URL = "PASTE_NEW_APPS_SCRIPT_URL_HERE";
 
   async function submitEnquiry(e) {
     e.preventDefault();
@@ -387,18 +385,13 @@
 
     try {
       const formData = new FormData(form);
-      const res = await fetch(FORM_ENDPOINT, {
+      await fetch(SCRIPT_URL, {
         method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
+        mode: 'no-cors',
+        body: formData
       });
-      const data = await res.json();
-      if (data.success === 'true' || data.success === true) {
-        alert('Thank you! Our team will contact you shortly.');
-        form.reset();
-      } else {
-        alert('Something went wrong. Please try again or call us directly.');
-      }
+      alert('Thank you! Our team will contact you shortly.');
+      form.reset();
     } catch (err) {
       alert('Something went wrong. Please try again or call us directly.');
     } finally {

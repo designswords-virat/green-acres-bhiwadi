@@ -1,81 +1,55 @@
 /**
- * Green Acres Bhiwadi — Lead Capture
+ * Green Acres Bhiwadi — Email-only Lead Relay
  *
- * Writes form submissions into your CRM Google Sheet ("Green Acre_ Bhiwadi_...").
- * Auto-fills S.NO, DATE, NAME, NUMBER, SOURCE, Interested In, E-MAIL ID.
- * Sends an email notification on every submission.
+ * Receives the form POST and emails the lead to RECIPIENT_EMAIL.
+ * No Google Sheet, no extra setup. Sends FROM your Google account
+ * (so the recipient does not need to confirm anything).
+ *
+ * Setup: see setup-instructions.md
  */
 
-// ============== EDIT THESE ==============
-const NOTIFY_EMAIL = "realtyreverence@gmail.com";
-
-// Paste the Sheet ID from your CRM sheet URL.
-// URL pattern:
-//   https://docs.google.com/spreadsheets/d/<<<THIS_IS_THE_ID>>>/edit#...
-const SHEET_ID = "PASTE_SHEET_ID_HERE";
-
-// Tab name inside the CRM sheet to write into.
-const SHEET_TAB = "Sheet1";
-// ========================================
+// === EDIT THIS ===
+const RECIPIENT_EMAIL = "realtyreverence@gmail.com";
+// =================
 
 function doPost(e) {
   try {
     const p = e.parameter;
-    const ss = SpreadsheetApp.openById(SHEET_ID);
-    const sheet = ss.getSheetByName(SHEET_TAB) || ss.getSheets()[0];
-    const now = new Date();
-
-    // Compute next S.NO by looking at the max value in column A (data starts at row 2)
-    const lastRow = sheet.getLastRow();
-    let nextSerial = 1;
-    if (lastRow >= 2) {
-      const serials = sheet.getRange(2, 1, lastRow - 1, 1).getValues();
-      const maxSerial = serials.reduce(function (max, row) {
-        const v = Number(row[0]);
-        return (isFinite(v) && v > max) ? v : max;
-      }, 0);
-      nextSerial = maxSerial + 1;
-    }
-
-    // Format DATE as DD.MM.YYYY (matches the existing CRM format)
-    const dd = String(now.getDate()).padStart(2, "0");
-    const mm = String(now.getMonth() + 1).padStart(2, "0");
-    const formattedDate = dd + "." + mm + "." + now.getFullYear();
-
-    // Column layout (A → J):
-    //   A: S.NO   B: DATE   C: NAME   D: NUMBER   E: SOURCE
-    //   F: What are you interested in   G: E-MAIL ID
-    //   H: Location   I: Visit Done   J: REMARKS
-    sheet.appendRow([
-      nextSerial,
-      formattedDate,
-      p.name || "",
-      p.contact || "",
-      "Website",
-      p.interest || "",
-      p.email || "",
-      "",  // Location — filled manually
-      "",  // Visit Done — filled manually
-      ""   // Remarks — filled manually
-    ]);
-
-    // Email notification
     const subject = "New Enquiry — Green Acres Bhiwadi (" + (p.interest || "—") + ")";
-    const body =
-      "A new enquiry from your Green Acres landing page:\n\n" +
-      "S.NO          : " + nextSerial + "\n" +
-      "Interested in : " + (p.interest || "—") + "\n" +
-      "Name          : " + (p.name || "—") + "\n" +
-      "Contact       : " + (p.contact || "—") + "\n" +
-      "Email         : " + (p.email || "—") + "\n" +
-      "Source        : Website\n" +
-      "Date          : " + formattedDate + "\n\n" +
-      "— Green Acres Lead Bot";
 
-    MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
+    const html =
+      "<div style='font-family:Arial,sans-serif;color:#1a2b22;max-width:560px'>" +
+        "<h2 style='color:#0d3b1f;border-bottom:2px solid #b78b3a;padding-bottom:10px;margin:0 0 18px'>" +
+          "New Enquiry — Green Acres Bhiwadi" +
+        "</h2>" +
+        "<table style='font-size:14px;border-collapse:collapse;width:100%'>" +
+          "<tr><td style='padding:8px 14px 8px 0;color:#6b7a72;width:130px'>Interested in</td>" +
+              "<td style='padding:8px 0'><strong>" + escapeHtml(p.interest || "—") + "</strong></td></tr>" +
+          "<tr><td style='padding:8px 14px 8px 0;color:#6b7a72'>Name</td>" +
+              "<td style='padding:8px 0'>" + escapeHtml(p.name || "—") + "</td></tr>" +
+          "<tr><td style='padding:8px 14px 8px 0;color:#6b7a72'>Contact</td>" +
+              "<td style='padding:8px 0'><a href='tel:" + escapeHtml(p.contact || "") + "' style='color:#16432d'>" +
+                escapeHtml(p.contact || "—") + "</a></td></tr>" +
+          "<tr><td style='padding:8px 14px 8px 0;color:#6b7a72'>Email</td>" +
+              "<td style='padding:8px 0'><a href='mailto:" + escapeHtml(p.email || "") + "' style='color:#16432d'>" +
+                escapeHtml(p.email || "—") + "</a></td></tr>" +
+        "</table>" +
+        "<p style='font-size:12px;color:#999;margin-top:30px'>" +
+          "Sent automatically from green-acres-bhiwadi.vercel.app" +
+        "</p>" +
+      "</div>";
+
+    const mailOptions = {
+      to: RECIPIENT_EMAIL,
+      subject: subject,
+      htmlBody: html
+    };
+    if (p.email) mailOptions.replyTo = p.email;
+
+    MailApp.sendEmail(mailOptions);
 
     return ContentService
-      .createTextOutput(JSON.stringify({ ok: true, serial: nextSerial }))
+      .createTextOutput(JSON.stringify({ ok: true }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService
@@ -86,4 +60,13 @@ function doPost(e) {
 
 function doGet() {
   return ContentService.createTextOutput("Green Acres lead endpoint is live.");
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }

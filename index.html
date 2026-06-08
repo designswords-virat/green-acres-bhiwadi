@@ -355,6 +355,9 @@
 <!-- ===== STICKY ENQUIRY BAR ===== -->
 <div class="enquiry-bar" id="register">
   <form id="enquiryForm" onsubmit="submitEnquiry(event)">
+    <input type="hidden" name="_subject" value="New Enquiry — Green Acres Bhiwadi" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
     <select name="interest" required>
       <option value="">Interested in</option>
       <option>Residential Land</option>
@@ -372,7 +375,7 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwNJjGATsrIUbA8KThrKwt-h7iNc7Ewq3KF9lR9BufuNDFy4ZS4UwSCVtkm70hFGzlH/exec";
+  const FORM_ENDPOINT = "https://formsubmit.co/ajax/realtyreverence@gmail.com";
 
   async function submitEnquiry(e) {
     e.preventDefault();
@@ -384,13 +387,18 @@
 
     try {
       const formData = new FormData(form);
-      await fetch(SCRIPT_URL, {
+      const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
-        body: formData
+        body: formData,
+        headers: { 'Accept': 'application/json' }
       });
-      alert('Thank you! Our team will contact you shortly.');
-      form.reset();
+      const data = await res.json();
+      if (data.success === 'true' || data.success === true) {
+        alert('Thank you! Our team will contact you shortly.');
+        form.reset();
+      } else {
+        alert('Something went wrong. Please try again or call us directly.');
+      }
     } catch (err) {
       alert('Something went wrong. Please try again or call us directly.');
     } finally {

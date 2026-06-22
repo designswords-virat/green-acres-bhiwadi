@@ -383,8 +383,13 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
       <option>Apartments</option>
     </select>
     <input name="name" type="text" placeholder="Name" required />
-    <input name="contact" type="tel" placeholder="Contact" required pattern="[0-9]{10}" />
-    <input name="email" type="email" placeholder="Email" required />
+    <input name="contact" type="tel" placeholder="10-digit mobile number" required
+           pattern="[0-9]{10}" maxlength="10" inputmode="numeric"
+           title="Please enter a 10-digit mobile number"
+           oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10)" />
+    <input name="email" type="email" placeholder="Email" required
+           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+           title="Please enter a valid email (must include @)" />
     <button type="submit" id="submitBtn">Submit</button>
   </form>
 </div>

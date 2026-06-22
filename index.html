@@ -382,7 +382,10 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
       <option>Villa</option>
       <option>Apartments</option>
     </select>
-    <input name="name" type="text" placeholder="Name" required />
+    <input name="name" type="text" placeholder="Name" required
+           pattern="[A-Za-z\s.'\-]+"
+           title="Name can only contain letters, spaces, dots, hyphens"
+           oninput="this.value = this.value.replace(/[^A-Za-z\s.'\-]/g, '')" />
     <input name="contact" type="tel" placeholder="10-digit mobile number" required
            pattern="[0-9]{10}" maxlength="10" inputmode="numeric"
            title="Please enter a 10-digit mobile number"

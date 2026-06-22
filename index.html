@@ -393,11 +393,32 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwisJwPXWvenShaj0DQfsNGHm-NnfntEGqTIWaPXqaK3wHWAXWjVurq3TybyYf31KvO/exec";
+  const STORAGE_KEY = 'greenAcresLeadSubmitted';
+
+  function getSubmittedContacts() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    catch (e) { return []; }
+  }
+
+  function markSubmitted(contact) {
+    const list = getSubmittedContacts();
+    if (!list.includes(contact)) {
+      list.push(contact);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+  }
 
   async function submitEnquiry(e) {
     e.preventDefault();
     const form = document.getElementById('enquiryForm');
     const btn = document.getElementById('submitBtn');
+    const contact = form.contact.value.trim();
+
+    if (getSubmittedContacts().includes(contact)) {
+      window.location.href = '/thank-you/';
+      return;
+    }
+
     const original = btn.textContent;
     btn.textContent = 'Sending...';
     btn.disabled = true;
@@ -409,6 +430,7 @@ src="https://www.facebook.com/tr?id=3863944500407319&ev=PageView&noscript=1"
         mode: 'no-cors',
         body: formData
       });
+      markSubmitted(contact);
       window.location.href = '/thank-you/';
     } catch (err) {
       alert('Something went wrong. Please try again or call us directly.');

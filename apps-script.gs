@@ -20,11 +20,23 @@ function doPost(e) {
       sheet.setFrozenRows(1);
     }
 
+    const contact = (p.contact || "").toString().trim();
+
+    if (contact && sheet.getLastRow() > 1) {
+      const existing = sheet.getRange(2, 4, sheet.getLastRow() - 1, 1).getValues();
+      const isDuplicate = existing.some(row => String(row[0]).trim() === contact);
+      if (isDuplicate) {
+        return ContentService
+          .createTextOutput(JSON.stringify({ ok: true, duplicate: true }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+
     sheet.appendRow([
       now,
       p.interest || "",
       p.name || "",
-      p.contact || "",
+      contact,
       p.email || ""
     ]);
 
